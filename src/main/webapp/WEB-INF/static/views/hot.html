@@ -1,0 +1,57 @@
+  <div class="panel panel-default">
+        <div class="panel-heading">
+            <b> 热门 </b> </div>
+            <div class="panel-body">
+            <ul class="nav nav-tabs nav-stacked">
+
+              <div id="tableList1"></div>
+              
+             </ul>   
+             </div>
+    </div>
+
+    <script id="table-template1" type="text/x-handlebars-template">
+{{#each student}}
+ <div class="tdtitle">
+ <li>
+      <a href={{url}}> {{candy}} </a>
+  </li>
+  </div>
+{{/each}}
+ </script>
+
+ <script type="text/javascript">
+
+  function getPageh(pageno)
+  {
+    $.ajax({
+        url:'/Luobov/record/show20/'+pageno,
+        type:'GET', //GET
+        async:true,    //或false,是否异步
+        timeout:5000,    //超时时间
+        dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+        success:function(data,textStatus,jqXHR){
+          debugger;
+          for (var d in data) {
+            data[d].url = "mbase.html?pd="+data[d].filmid;
+          };
+          var mdata =new Object();
+          mdata.student = data;
+          var myTemplate = Handlebars.compile($("#table-template1").html());
+        $('#tableList1').html(myTemplate(mdata));
+       },
+      error:function(xhr,textStatus){
+          console.log('错误')
+          console.log(xhr)
+          console.log(textStatus)
+      },
+      complete:function(){
+          console.log('结束')
+      }
+   });
+  }
+
+    $(document).ready(function() {
+       getPageh(10);
+    }); 
+  </script>

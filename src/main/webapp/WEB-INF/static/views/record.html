@@ -1,0 +1,142 @@
+  <div id="tableList" >
+
+  </div>
+
+  <script id="table-template" type="text/x-handlebars-template">
+    
+    <h3>
+      <div class="filmtitle">
+        {{candy}}
+      </div>
+    </h3>
+    <div class="recordimg">
+      <a href={{url}} title={{candy}}>
+        <img
+        src={{imgurl}}
+        ></a>
+    </div>
+    <div class="recordinfo">
+      <div class="infotitle">{{info0}}</div>
+
+      <div class="infotitle">
+        <span></span>
+       {{info1}}
+      </div>
+      <div class="infotitle">
+        {{info2}}
+      </div>
+      <div class="infotitle">
+        <p>
+          豆瓣评分&nbsp; <font size="3" color="#33cc00">{{dbfen}}</font>
+        </p>
+
+      </div>
+    </div>
+    <div style="clear:both;" class="related-info">
+      <div class="related-title">
+        <h4>{{title}}剧情简介</h4>
+      </div>
+      <div style="width:700px;line-height:23px;font-size:6px;">
+        {{juqing}}
+      </div>
+    </div>
+
+    <div class="juqingimgs">
+    {{#if img3}}
+        <a href={{img3}} ><img src={{img3}} ></a>
+    {{/if}}    
+    {{#if img1}}
+        <a href={{img1}} ><img src={{img1}} ></a>
+    {{/if}}    
+    {{#if img2}}
+        <a href={{img2}} ><img src={{img2}} ></a>
+    {{/if}}    
+    {{#if img4}}
+        <a href={{img4}} ><img src={{img4}} ></a>
+    {{/if}}    
+
+    </div
+
+    </script>
+
+  <script type="text/javascript">
+
+
+function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
+
+function removeKh(str)
+{
+        str = str.replace(/<[^>]*?>(.*?)/gi,' '); //删除左部
+        str = str.replace(/(.*?)<\/[^>]*?>/gi,' ');  //删除右部
+        return str;
+}
+  function getPage(pd)
+  {
+    $.ajax({
+        url:'/Luobov/record/showone/'+pd,
+        type:'GET', //GET
+        async:true,    //或false,是否异步
+        timeout:5000,    //超时时间
+        dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+        success:function(data,textStatus,jqXHR){
+        data.info0 = removeKh(data.info0);
+        data.info1 = removeKh(data.info1);
+        data.info2 = removeKh(data.info2);
+        data.info3 = removeKh(data.info3);
+
+        var myTemplate = Handlebars.compile($("#table-template").html());
+        $('#tableList').html(myTemplate(data));
+       },
+      error:function(xhr,textStatus){
+          console.log('错误')
+          console.log(xhr)
+          console.log(textStatus)
+      },
+      complete:function(){
+          console.log('结束')
+      }
+   });
+  }
+
+
+      $(document).ready(function() {
+       // alert("haha1");
+       // 
+       var pd = GetQueryString("pd");
+       //alert(pd);
+       getPage(pd);
+       return;
+        var data = {"filmid":344,"candy":"十一月规则.2015","title":"十一月规则","url":"http://www.gzzhe.com/m/40493.html","ename":"November Rule(2015)","info":"类型： 地区：美国","picurl":"D://Film//image/down2/2016/11/26/p2400263069.jpg","dbfen":"6.0","imdbfen":"6.0","title2":"十一月规则.2015","info0":"<li><span>上映：</span>2015 年 <span class=\"zt\">片长：</span><span>94</span>分钟<span class=\"zt\">更新：</span>2016-11-26</li>","info1":"<li><span>类型：</span></li>","info2":"<li><span>主演：</span>Mo McRae,塔缇娜·阿里,DJ·考尔斯,玛丽昂·歌迪亚,瑞克·冈萨雷斯 Rick Gonzalez,杰·埃利斯,Joyful Drake,维多利亚·洛威尔</li>","info3":"<li><span>地区：</span>美国</li>","imgurl":"D://Film//image/down2/2016/11/26/p2400263069.jpg","juqing":"　　和未来的运动鞋的企业家史提夫|谁仍在从他爸爸|死了一个“十一月”规则以保持着距离的女人谁似乎对他们的关系太严重。每年的11月1日|史提夫使了一个天大的谎言为了与他的现任女友分手。然而|今年|当他给美丽的利亚走在她的论文|他意识到自己的不成熟和专制统治也就失去了他梦想中的女人。但他是否能赢得利亚似乎越来越怀疑|尤其是她开始约会的职业体育明星| James Avedon后。","img1":null,"img2":null,"img3":null,"img4":null,"img5":null,"img6":null};
+
+       // data.candy="haha";
+        data.test="-----------";
+		debugger;
+/*
+var s=data.info0.match(/(\/span>(\w+)年)/g);
+if(s!=null)
+for(var i= 0;i<s.length;i++)
+{
+alert(s[i]);
+alert(RegExp.$1)
+}
+
+var str = '111_abc_222';
+//var match = str.match(/(^\d+)|(\d+$)/g);
+var match = str.match(/(b*c)|(\d+$)/g);
+var num1 = match[0];
+var num2 = match[1];
+alert(num1);
+alert(num2);
+*/
+
+
+        var myTemplate = Handlebars.compile($("#table-template").html());
+        //将json对象用刚刚注册的Handlebars模版封装，得到最终的html，插入到基础table中。
+        $('#tableList').html(myTemplate(data));
+      });
+    </script>

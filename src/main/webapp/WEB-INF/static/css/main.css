@@ -1,0 +1,119 @@
+.btn-default {
+	color: #333;
+	background-color: #fff;
+	border-color: #ccc;
+}
+
+.myactive {
+	color: ##1C6B82;
+	background-color: #2A4952;
+}
+
+.ss1 {
+    widtH: 550px;
+    font-size: 14px;
+    text-indent: 12px;
+    float: left;
+    border-left: 1px dashed #ededed;
+}
+
+ .u1{
+    padding-left: 0px;
+ }
+ .u1 li {
+    height: 110px;
+    line-height: 40px;
+    border-bottom: 1px dashed #ededed;
+    border-top: 1px dashed #ededed;
+    overflow: hidden;
+}
+.tdtitle {
+    width: 250px;
+    height: 30px;
+    word-wrap: break-word;
+    word-break: break-all;
+    float: left;
+}
+ .tdimg {
+    width: 120px;
+    height: 130px;
+    padding: 10px;
+    float: left;
+}
+ .tdimg img {
+    width: 90px;
+    height: 110px;
+    box-shadow: 4px 4px 4px rgba(0,0,0,.1);
+}
+
+.tdtitle p{
+    width: 120px;
+    float: left;
+}
+.filmelem{
+    margin-top: 30px;
+    float:left;
+}
+
+
+
+
+
+
+
+.filmtitle{
+
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+ .recordimg {
+    width:  165px;
+    height: 245px;
+    padding: 10px;
+    margin-right: 20px;
+    float: left;
+}
+ .recordimg img {
+    width: 150px;
+    height:230px;
+    box-shadow: 4px 4px 4px rgba(0,0,0,.1);
+}
+
+.recordinfo {
+    margin-top: 35px;
+}
+
+.infotitle  {
+     width: 650px;
+     padding: 10px;
+     line-height:25px;
+}
+
+.infotitle p{
+    float:left;
+    padding-right: 10px;
+}
+.related-info{
+}
+
+.related-title{
+     margin-top: 100px;
+}
+.related-info{
+    
+}
+
+ .juqingimgs {
+  /*  width:  165px;
+    height: 245px;
+    */padding: 10px;
+    margin-right: 20px;
+    float: left;
+}
+ .juqingimgs img {
+    width: 330px;
+    height:200px;
+    padding-top: 5px;
+  /*  box-shadow: 4px 4px 4px rgba(0,0,0,.1);
+}

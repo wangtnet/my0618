@@ -1,0 +1,146 @@
+<ul class="col-md-12"  style="padding-left: 0px;background: #F2F2F3;margin-bottom: 30px;">
+	<div id="tableList"></div>
+</ul>
+
+<script id="table-template" type="text/x-handlebars-template">
+{{#each student}}
+ <li class="col-md-6 filmelem" >
+    <div class="tdimg">
+      <a href={{url}} title={{candy}}><img
+        src="{{picurl}}"
+        ></a>
+    </div>
+ <div>
+    <div class="tdtitle">
+      <a href={{url}} title={{candy}}>{{candy}}</a>
+    </div>
+    <div class="tdtitle">{{info}}</div>
+    <div class="tdtitle">
+    <p>
+      豆瓣评分&nbsp;<font size="3" color="#33cc00">{{dbfen}}</font>
+    </p>
+
+
+  </div>
+</div>  
+  </li>
+     {{/each}}
+ </script>
+<script type="text/javascript">
+
+  function getPage(pageno)
+  {
+    $.ajax({
+        url:'/Luobov/record/show20/'+pageno,
+        type:'GET', //GET
+        async:true,    //或false,是否异步
+        timeout:5000,    //超时时间
+        dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+        success:function(data,textStatus,jqXHR){
+          for (var d in data) {
+            data[d].url = "mbase.html?pd="+data[d].filmid;
+          };
+          var mdata =new Object();
+          mdata.student = data;
+          var myTemplate = Handlebars.compile($("#table-template").html());
+        $('#tableList').html(myTemplate(mdata));
+       },
+      error:function(xhr,textStatus){
+          console.log('错误')
+          console.log(xhr)
+          console.log(textStatus)
+      },
+      complete:function(){
+          console.log('结束')
+      }
+   });
+  }
+ function searchTitle(title)
+  {
+    $.ajax({
+        url:'/Luobov/record/search/'+title,
+        type:'GET', //GET
+        async:true,    //或false,是否异步
+        timeout:5000,    //超时时间
+        dataType:'json',    //返回的数据格式：json/xml/html/script/jsonp/text
+        success:function(data,textStatus,jqXHR){
+          for (var d in data) {
+            data[d].url = "mbase.html?pd="+data[d].filmid;
+          };
+          var mdata =new Object();
+          mdata.student = data;
+          var myTemplate = Handlebars.compile($("#table-template").html());
+        $('#tableList').html(myTemplate(mdata));
+       },
+      error:function(xhr,textStatus){
+          console.log('错误')
+          console.log(xhr)
+          console.log(textStatus)
+      },
+      complete:function(){
+          console.log('结束')
+      }
+   });
+  }
+
+function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if(r!=null)return  unescape(r[2]); return null;
+}
+  function getCurrentPage()
+  {
+      var pageNo = GetQueryString("pg");
+      $("#currentpage").text(pageNo);
+      //var pageNo =  $("#currentpage").text();
+      getPage(pageNo);
+  }
+
+  function getNextPage()
+  {
+      var pageNo =  $("#currentpage").text();
+      var curNo =parseInt(pageNo)+1;
+      window.location.href="/Luobov/static/views/lbase.html?pg="+curNo; 
+
+     // $("#currentpage").text(curNo);
+      //getPage(curNo);
+  }
+
+  function getPrevPage()
+  {
+      var pageNo =  $("#currentpage").text();
+      if(pageNo <= 1) return;
+      var curNo =parseInt(pageNo)-1;
+      window.location.href="/Luobov/static/views/lbase.html?pg="+curNo; 
+
+     // $("#currentpage").text(curNo);
+     // getPage(curNo);
+  }
+
+  $(document).ready(function() {
+      getCurrentPage();
+
+      $(".previous").click(function(){
+          getPrevPage();
+      })
+
+      $(".next").click(function(){
+          getNextPage();
+      })
+
+	})
+   function onclickSearch(){
+        debugger;
+        //alert(1);
+         //alert($("#searchtxt").val());
+        var strToUri = encodeURIComponent(encodeURIComponent($("#searchtxt").val()));  
+        searchTitle(strToUri);
+      }
+    
+</script>
+<ul class="pager" style="margin-left: 80px; margin-right: 80px;">
+	<li class="previous"><a href="#">上一页</a></li>
+    <li id="currentpage">1</li>
+	<li class="next"><a href="#">下一页</a></li>
+</ul>

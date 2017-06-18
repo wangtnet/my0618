@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.luobo.record.dao.IGzzheFilmrawDao" >
+  <resultMap id="BaseResultMap" type="com.luobo.record.pojo.GzzheFilmraw" >
+    <id column="filmid" property="filmid" jdbcType="BIGINT" />
+    <result column="candy" property="candy" jdbcType="VARCHAR" />
+    <result column="title" property="title" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="ename" property="ename" jdbcType="VARCHAR" />
+    <result column="info" property="info" jdbcType="VARCHAR" />
+    <result column="picurl" property="picurl" jdbcType="VARCHAR" />
+    <result column="dbfen" property="dbfen" jdbcType="VARCHAR" />
+    <result column="imdbfen" property="imdbfen" jdbcType="VARCHAR" />
+    <result column="title2" property="title2" jdbcType="VARCHAR" />
+    <result column="info0" property="info0" jdbcType="VARCHAR" />
+    <result column="info1" property="info1" jdbcType="VARCHAR" />
+    <result column="info2" property="info2" jdbcType="VARCHAR" />
+    <result column="info3" property="info3" jdbcType="VARCHAR" />
+    <result column="imgurl" property="imgurl" jdbcType="VARCHAR" />
+    <result column="juqing" property="juqing" jdbcType="VARCHAR" />
+    <result column="img1" property="img1" jdbcType="VARCHAR" />
+    <result column="img2" property="img2" jdbcType="VARCHAR" />
+    <result column="img3" property="img3" jdbcType="VARCHAR" />
+    <result column="img4" property="img4" jdbcType="VARCHAR" />
+    <result column="img5" property="img5" jdbcType="VARCHAR" />
+    <result column="img6" property="img6" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    filmid, candy, title, url, ename, info, picurl, dbfen, imdbfen, title2, info0, info1, 
+    info2, info3, imgurl, juqing, img1, img2, img3, img4, img5, img6
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from gzzhefilmraw
+    where filmid = #{filmid,jdbcType=BIGINT}
+  </select>
+    <select id="selectTwentyByNo" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from gzzhefilmraw
+    LIMIT #{no,jdbcType=BIGINT},12
+  </select>
+  <select id="selectByNameSearch" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from gzzhefilmraw
+    where title like #{title,jdbcType=VARCHAR}
+  </select>
+    <select id="selectByUrl" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from gzzhefilmraw
+    where url = #{url,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from gzzhefilmraw
+    where filmid = #{filmid,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.luobo.record.pojo.GzzheFilmraw" >
+    insert into gzzhefilmraw (filmid, candy, title, 
+      url, ename, info, picurl, 
+      dbfen, imdbfen, title2, 
+      info0, info1, info2, 
+      info3, imgurl, juqing, 
+      img1, img2, img3, img4, 
+      img5, img6)
+    values (#{filmid,jdbcType=BIGINT}, #{candy,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, 
+      #{url,jdbcType=VARCHAR}, #{ename,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR}, #{picurl,jdbcType=VARCHAR}, 
+      #{dbfen,jdbcType=VARCHAR}, #{imdbfen,jdbcType=VARCHAR}, #{title2,jdbcType=VARCHAR}, 
+      #{info0,jdbcType=VARCHAR}, #{info1,jdbcType=VARCHAR}, #{info2,jdbcType=VARCHAR}, 
+      #{info3,jdbcType=VARCHAR}, #{imgurl,jdbcType=VARCHAR}, #{juqing,jdbcType=VARCHAR}, 
+      #{img1,jdbcType=VARCHAR}, #{img2,jdbcType=VARCHAR}, #{img3,jdbcType=VARCHAR}, #{img4,jdbcType=VARCHAR}, 
+      #{img5,jdbcType=VARCHAR}, #{img6,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.luobo.record.pojo.GzzheFilmraw" >
+    insert into gzzhefilmraw
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="filmid != null" >
+        filmid,
+      </if>
+      <if test="candy != null" >
+        candy,
+      </if>
+      <if test="title != null" >
+        title,
+      </if>
+      <if test="url != null" >
+        url,
+      </if>
+      <if test="ename != null" >
+        ename,
+      </if>
+      <if test="info != null" >
+        info,
+      </if>
+      <if test="picurl != null" >
+        picurl,
+      </if>
+      <if test="dbfen != null" >
+        dbfen,
+      </if>
+      <if test="imdbfen != null" >
+        imdbfen,
+      </if>
+      <if test="title2 != null" >
+        title2,
+      </if>
+      <if test="info0 != null" >
+        info0,
+      </if>
+      <if test="info1 != null" >
+        info1,
+      </if>
+      <if test="info2 != null" >
+        info2,
+      </if>
+      <if test="info3 != null" >
+        info3,
+      </if>
+      <if test="imgurl != null" >
+        imgurl,
+      </if>
+      <if test="juqing != null" >
+        juqing,
+      </if>
+      <if test="img1 != null" >
+        img1,
+      </if>
+      <if test="img2 != null" >
+        img2,
+      </if>
+      <if test="img3 != null" >
+        img3,
+      </if>
+      <if test="img4 != null" >
+        img4,
+      </if>
+      <if test="img5 != null" >
+        img5,
+      </if>
+      <if test="img6 != null" >
+        img6,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="filmid != null" >
+        #{filmid,jdbcType=BIGINT},
+      </if>
+      <if test="candy != null" >
+        #{candy,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="ename != null" >
+        #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null" >
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="picurl != null" >
+        #{picurl,jdbcType=VARCHAR},
+      </if>
+      <if test="dbfen != null" >
+        #{dbfen,jdbcType=VARCHAR},
+      </if>
+      <if test="imdbfen != null" >
+        #{imdbfen,jdbcType=VARCHAR},
+      </if>
+      <if test="title2 != null" >
+        #{title2,jdbcType=VARCHAR},
+      </if>
+      <if test="info0 != null" >
+        #{info0,jdbcType=VARCHAR},
+      </if>
+      <if test="info1 != null" >
+        #{info1,jdbcType=VARCHAR},
+      </if>
+      <if test="info2 != null" >
+        #{info2,jdbcType=VARCHAR},
+      </if>
+      <if test="info3 != null" >
+        #{info3,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="juqing != null" >
+        #{juqing,jdbcType=VARCHAR},
+      </if>
+      <if test="img1 != null" >
+        #{img1,jdbcType=VARCHAR},
+      </if>
+      <if test="img2 != null" >
+        #{img2,jdbcType=VARCHAR},
+      </if>
+      <if test="img3 != null" >
+        #{img3,jdbcType=VARCHAR},
+      </if>
+      <if test="img4 != null" >
+        #{img4,jdbcType=VARCHAR},
+      </if>
+      <if test="img5 != null" >
+        #{img5,jdbcType=VARCHAR},
+      </if>
+      <if test="img6 != null" >
+        #{img6,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.luobo.record.pojo.GzzheFilmraw" >
+    update gzzhefilmraw
+    <set >
+      <if test="candy != null" >
+        candy = #{candy,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null" >
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="ename != null" >
+        ename = #{ename,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null" >
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="picurl != null" >
+        picurl = #{picurl,jdbcType=VARCHAR},
+      </if>
+      <if test="dbfen != null" >
+        dbfen = #{dbfen,jdbcType=VARCHAR},
+      </if>
+      <if test="imdbfen != null" >
+        imdbfen = #{imdbfen,jdbcType=VARCHAR},
+      </if>
+      <if test="title2 != null" >
+        title2 = #{title2,jdbcType=VARCHAR},
+      </if>
+      <if test="info0 != null" >
+        info0 = #{info0,jdbcType=VARCHAR},
+      </if>
+      <if test="info1 != null" >
+        info1 = #{info1,jdbcType=VARCHAR},
+      </if>
+      <if test="info2 != null" >
+        info2 = #{info2,jdbcType=VARCHAR},
+      </if>
+      <if test="info3 != null" >
+        info3 = #{info3,jdbcType=VARCHAR},
+      </if>
+      <if test="imgurl != null" >
+        imgurl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="juqing != null" >
+        juqing = #{juqing,jdbcType=VARCHAR},
+      </if>
+      <if test="img1 != null" >
+        img1 = #{img1,jdbcType=VARCHAR},
+      </if>
+      <if test="img2 != null" >
+        img2 = #{img2,jdbcType=VARCHAR},
+      </if>
+      <if test="img3 != null" >
+        img3 = #{img3,jdbcType=VARCHAR},
+      </if>
+      <if test="img4 != null" >
+        img4 = #{img4,jdbcType=VARCHAR},
+      </if>
+      <if test="img5 != null" >
+        img5 = #{img5,jdbcType=VARCHAR},
+      </if>
+      <if test="img6 != null" >
+        img6 = #{img6,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where filmid = #{filmid,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.luobo.record.pojo.GzzheFilmraw" >
+    update gzzhefilmraw
+    set candy = #{candy,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      ename = #{ename,jdbcType=VARCHAR},
+      info = #{info,jdbcType=VARCHAR},
+      picurl = #{picurl,jdbcType=VARCHAR},
+      dbfen = #{dbfen,jdbcType=VARCHAR},
+      imdbfen = #{imdbfen,jdbcType=VARCHAR},
+      title2 = #{title2,jdbcType=VARCHAR},
+      info0 = #{info0,jdbcType=VARCHAR},
+      info1 = #{info1,jdbcType=VARCHAR},
+      info2 = #{info2,jdbcType=VARCHAR},
+      info3 = #{info3,jdbcType=VARCHAR},
+      imgurl = #{imgurl,jdbcType=VARCHAR},
+      juqing = #{juqing,jdbcType=VARCHAR},
+      img1 = #{img1,jdbcType=VARCHAR},
+      img2 = #{img2,jdbcType=VARCHAR},
+      img3 = #{img3,jdbcType=VARCHAR},
+      img4 = #{img4,jdbcType=VARCHAR},
+      img5 = #{img5,jdbcType=VARCHAR},
+      img6 = #{img6,jdbcType=VARCHAR}
+    where filmid = #{filmid,jdbcType=BIGINT}
+  </update>
+</mapper>
