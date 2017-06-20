@@ -7,13 +7,19 @@
 
 </style>
 <body>
-
+<!--  
 <form action="/my/user/upload" method="post" enctype="multipart/form-data">
     <input type="file" name="uploadfile" />
     <input type="submit" value="upload" />
  </form>
+ -->
+<input type="file" id="one-specific-file" name="one-specific-file">
 <script src="../js/lib/jquery-validation-1.14.0/lib/jquery.js"></script>
-
+<script src="../js/lib/jquery.ajaxfileupload.js"></script>
+<script>
+$('#one-specific-file').ajaxfileupload({
+	  action: '/my/user/upload"'
+	});
 </script>
 </body>
 </html>

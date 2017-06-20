@@ -84,7 +84,7 @@ public class userController {
 	
 	@RequestMapping(value = "/upload", method = RequestMethod.POST)
     public ModelAndView upload(
-            @RequestParam("uploadfile") CommonsMultipartFile upfile,
+            @RequestParam("one-specific-file") CommonsMultipartFile upfile,
             HttpServletRequest req) throws IOException {
         // |获取在Web服务器上的 绝对路径
 
