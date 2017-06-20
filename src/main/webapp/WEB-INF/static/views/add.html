@@ -8,39 +8,12 @@
 </style>
 <body>
 
-<form action="url1" method="post" enctype ="multipart/form-data" runat="server">
-    <input id="File1" runat="server" name="UpLoadFile" type="file" />
-    <input type="submit" name="Button1" value="Button" id="Button1" />
-</form>
-<form id="imageForm" enctype="multipart/form-data" action="url" method="POST">
-         <input type="text" name="imgName" />
-         <input type="file" name="image" accept=""/>
-         <button type="submit" >update</button>
-     </form>
+<form action="/my/user/upload" method="post" enctype="multipart/form-data">
+    <input type="file" name="uploadfile" />
+    <input type="submit" value="upload" />
+ </form>
 <script src="../js/lib/jquery-validation-1.14.0/lib/jquery.js"></script>
-<script type="text/javascript" >
-    var ajax_option={
-        url: "url",                  //String, 表单提交的目标地址，此属性会覆盖表单的action属性
-        type:"POST",             //String，表单提交的方式(POST or GET)，此属性会覆盖表单的method属性
-        dataType: null,    //String，指定接受服务端返回的数据类型(xml，script  or  json)
-        clearFomr: true,   //boolean，默认为false，成功提交后是否清除所有表单元素的值
-        resetFomr: true,  //boolean，默认为false，成功提交后是否重置所有表单元素的值
-        timeout: 3000,    //number，单位ms，限制请求的时间，当请求大于设置的时间后，跳出请求
-        success:function(responseText,statusText,xhr,$form){
-            console.log(responseText);
-            //业务提示
-        },//提交成功后的回调函数 。参数详解：responseText，服务器返回的数据内容；statusText，服务器返回的状态
-        beforSubmit: function(formData, jqForm, options){
-            console.log(formData);
-            //业务提示
-        },//提交之前的回调函数。参数详解：formData，数组对象，为表单的内容；jqForm，jQuery对象，封装了表单的元素；options，之前设置的ajaxSubmit的option对象。
-    };
 
-    //表单提交事件
-    $('#imageForm').submit(function(){
-        $("#imageForm").ajaxSubmit(ajax_option);
-        return false;
-    })
 </script>
 </body>
 </html>

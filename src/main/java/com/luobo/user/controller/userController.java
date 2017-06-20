@@ -1,6 +1,10 @@
 package com.luobo.user.controller;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Hashtable;
 
 import javax.annotation.Resource;
@@ -10,7 +14,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.luobo.common.VerifyCodeUtils;
 import com.luobo.user.pojo.user;
@@ -74,4 +82,35 @@ public class userController {
 		System.out.println(hashCheckCode.get(ssid));
 	}
 	
+	@RequestMapping(value = "/upload", method = RequestMethod.POST)
+    public ModelAndView upload(
+            @RequestParam("uploadfile") CommonsMultipartFile upfile,
+            HttpServletRequest req) throws IOException {
+        // |获取在Web服务器上的 绝对路径
+
+        System.out.println("come");
+        String path = req.getRealPath("/WEB-INF/static/");
+        System.out.println(path);
+        // |获取输入流
+        InputStream is = upfile.getInputStream();
+        // |文件输出流
+        OutputStream os = new FileOutputStream(new File(path,upfile.getOriginalFilename()));
+
+        System.out.println("come0");
+        // |循环写入
+        int length = 0;
+        byte[] buffer = new byte[128];
+        while ((length = is.read(buffer)) != -1) {
+            os.write(buffer, 0, length);
+        }
+        System.out.println("come1");
+        is.close();
+        os.close();
+        // ===渲染===
+        System.out.println("come2");
+        // ModelAndView mView = new ModelAndView();
+        // mView.setViewName("upload");
+        // |返回至渲染器
+        return null;
+    }
 }
